@@ -9,12 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.newapp.R
+import com.example.newapp.api.Api
 import com.example.newapp.databinding.FragmentHomeBinding
+import com.example.newapp.repository.TopStoryRepository
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
+    private val homeViewModel: HomeViewModel by lazy{
+        ViewModelProvider(this, HomeViewModelFactory(TopStoryRepository(Api.apiService)))
+            .get(HomeViewModel::class.java)
+    }
+
+    private lateinit var adapter: TopStoryViewAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,15 +32,15 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        adapter = TopStoryViewAdapter()
+        binding.recycler.adapter = adapter
 
+        homeViewModel.getTopStory()
 
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-
+        homeViewModel.topStory.observe(viewLifecycleOwner, Observer {
+            adapter.add(it)
         })
         return root
     }

@@ -15,12 +15,14 @@
         >
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/article_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
+            android:id="@+id/article_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -38,15 +40,13 @@
             android:text="Short story"
             />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_gravity="end"
-            android:padding="8dp"
-            android:text="View Story"
-            />
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="View more"
+           android:layout_margin="8dp"
+           android:layout_gravity="end"
+           />
 
 
     </LinearLayout>
