@@ -20,8 +20,8 @@ interface ApiService {
     @GET("topstories/v2/home.json")
     suspend fun getTopStory(@Query("api-key")apiKey:String): Home
 
-    @GET("/reviews/picks.json")
-    suspend fun getMovieReviews(): LiveData<List<MovieReview>>
+    @GET("movies/v2/reviews/picks.json")
+    suspend fun getMovieReviews(@Query("api-key")apiKey:String): MovieReview
 
 
 }

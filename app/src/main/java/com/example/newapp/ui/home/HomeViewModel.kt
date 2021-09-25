@@ -12,13 +12,39 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val repository: TopStoryRepository) : ViewModel() {
 
     private val _topStories = MutableLiveData<List<TopStory>>()
-
     val topStory: LiveData<List<TopStory>> = _topStories
 
-    fun getTopStory(){
+    private val _isReloadingData = MutableLiveData<Boolean>()
+    val isReloadingData:LiveData<Boolean> get() = _isReloadingData
+
+    private val firstSection = "arts"
+
+    private val sectionItem = listOf(
+        "arts", "automobiles", "books", "business", "fashion",
+        "food", "health", "home", "insider", "magazine",
+        "movies", "nyregion", "obituaries", "opinion",
+        "politics", "realestate", "science", "sports",
+        "sundayreview", "technology", "theater", "t-magazine",
+        "travel", "upshot", "us","world"
+    )
+
+    private fun getTopStory(section: String){
         viewModelScope.launch {
-            _topStories.value = repository.getTopStory()
+            _isReloadingData.value = true
+            try{
+                _topStories.value = repository.getTopStory()
+            }
+            catch (ex:Exception){
+
+            }
+
+            _isReloadingData.value = false
+
         }
+    }
+
+    fun retrieveDate(value: Int){
+        getTopStory(sectionItem[value])
     }
 
 }
