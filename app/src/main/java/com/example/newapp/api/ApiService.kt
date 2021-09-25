@@ -17,8 +17,8 @@ private val key = ""
 
 interface ApiService {
 
-    @GET("topstories/v2/home.json")
-    suspend fun getTopStory(@Query("api-key")apiKey:String): Home
+    @GET("topstories/v2/{section}.json")
+    suspend fun getTopStory(@Path("section")section: String, @Query("api-key")apiKey:String): Home
 
     @GET("movies/v2/reviews/picks.json")
     suspend fun getMovieReviews(@Query("api-key")apiKey:String): MovieReview

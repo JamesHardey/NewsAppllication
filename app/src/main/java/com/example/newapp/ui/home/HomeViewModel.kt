@@ -32,7 +32,7 @@ class HomeViewModel(private val repository: TopStoryRepository) : ViewModel() {
         viewModelScope.launch {
             _isReloadingData.value = true
             try{
-                _topStories.value = repository.getTopStory()
+                _topStories.value = repository.getTopStory(section)
             }
             catch (ex:Exception){
 

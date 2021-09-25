@@ -5,8 +5,8 @@ import com.example.newapp.api.ApiService
 
 class TopStoryRepository(private val apiService: ApiService){
 
-    val key:String = "WSnW0iIkuNFrg1BUAUNQmH9XpiBHFsrg"
+    private val key:String = "WSnW0iIkuNFrg1BUAUNQmH9XpiBHFsrg"
 
-    suspend fun getTopStory() = apiService.getTopStory(key).results
+    suspend fun getTopStory(section:String) = apiService.getTopStory(section,key).results
 
 }
