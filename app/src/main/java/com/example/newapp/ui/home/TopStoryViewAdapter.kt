@@ -8,17 +8,20 @@ import com.example.newapp.databinding.ItemArticleBinding
 import com.example.newapp.models.topstory.TopStory
 import com.example.newapp.repository.TopStoryRepository
 
-class TopStoryViewAdapter : RecyclerView.Adapter<TopStoryViewAdapter.TopStoryViewHolder>() {
+class TopStoryViewAdapter(private val listener: (TopStory) -> Unit) : RecyclerView.Adapter<TopStoryViewAdapter.TopStoryViewHolder>() {
 
     private var list = listOf<TopStory>()
 
     inner class TopStoryViewHolder(private val binding: ItemArticleBinding)
         :RecyclerView.ViewHolder(binding.root){
 
-            fun bind(topStory: TopStory){
+            fun bind(topStory: TopStory, listener: (TopStory) -> Unit){
                 binding.articleTitle.text = topStory.title
                 binding.textView.text = topStory.abstract
                 binding.articleImage.load(topStory.multimedia.last().url)
+                binding.viewMore.setOnClickListener {
+                    listener(topStory)
+                }
             }
 
     }
@@ -37,7 +40,7 @@ class TopStoryViewAdapter : RecyclerView.Adapter<TopStoryViewAdapter.TopStoryVie
 
     override fun onBindViewHolder(holder: TopStoryViewHolder, position: Int) {
         val item = list[position]
-        holder.bind(item)
+        holder.bind(item,listener)
 
     }
 

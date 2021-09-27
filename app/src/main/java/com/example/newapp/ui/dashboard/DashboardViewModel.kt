@@ -13,13 +13,26 @@ import kotlinx.coroutines.launch
 class DashboardViewModel(private val movieReviewRepository: MovieReviewRepository) : ViewModel() {
 
     private val _movieReviews = MutableLiveData<List<Result>>()
-
     val movieReviews: LiveData<List<Result>> = _movieReviews
 
-    fun getMovieReview(){
+    private val _isReloadingData = MutableLiveData<Boolean>()
+    val isReloadingData:LiveData<Boolean> get() = _isReloadingData
+
+    private fun getMovieReview(){
         viewModelScope.launch {
-            _movieReviews.value = movieReviewRepository.getMovieReviews()
+            _isReloadingData.value = true
+            try{
+                _movieReviews.value = movieReviewRepository.getMovieReviews()
+            }
+            catch(ex: Exception){
+
+            }
+            _isReloadingData.value = false
         }
+    }
+
+    fun retrieveReviews(){
+        getMovieReview()
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.newapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,14 +10,18 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.newapp.R
 import com.example.newapp.api.Api
 import com.example.newapp.databinding.FragmentHomeBinding
+import com.example.newapp.models.topstory.TopStory
 import com.example.newapp.repository.TopStoryRepository
+import com.example.newapp.ui.webview.ArticleActivity
 
 class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
 
@@ -57,11 +62,14 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = TopStoryViewAdapter()
+        adapter = TopStoryViewAdapter(){ topStory ->
+            moveToArticleScreen(topStory)
+        }
         binding.recycler.adapter = adapter
 
         swipeRefreshLayout = binding.swipeRefresh
         swipeRefreshLayout.setOnRefreshListener(this)
+
 
         val dropDownAdapter = ArrayAdapter(requireContext(), R.layout.item_list_section, items)
 
@@ -92,6 +100,14 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
 
     private fun getData(value: Int){
         homeViewModel.retrieveDate(value)
+    }
+
+    private fun moveToArticleScreen(topStory: TopStory){
+        val link = topStory.url
+        findNavController().navigate(R.id.action_navigation_home_to_articleFragment, bundleOf("link" to link))
+        val data = Intent(requireActivity(),ArticleActivity::class.java)
+        data.putExtra("link",link)
+        //startActivity(data)
     }
 
 }

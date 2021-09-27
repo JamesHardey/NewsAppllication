@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.newapp.R
 import com.example.newapp.databinding.FragmentArticleBinding
 import com.example.newapp.databinding.FragmentHomeBinding
@@ -16,33 +19,53 @@ import com.example.newapp.ui.home.HomeViewModel
 class ArticleFragment : Fragment() {
 
     private lateinit var articleWebViewModel: ArticleWebViewModel
-    private var _binding: FragmentArticleBinding? = null
+    private lateinit var binding: FragmentArticleBinding
+    private lateinit var link: String
+    private lateinit var webView: WebView
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        
+        link = arguments?.getString("link")!!
         articleWebViewModel =
             ViewModelProvider(this).get(ArticleWebViewModel::class.java)
 
-        _binding = FragmentArticleBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        binding = FragmentArticleBinding.inflate(inflater, container, false)
 
 
         articleWebViewModel.text.observe(viewLifecycleOwner, Observer {
 
         })
-        return root
+
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        webView = binding.webView
+        webView.loadUrl(link)
+        webView.settings.javaScriptEnabled = true
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
 
 }

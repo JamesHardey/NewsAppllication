@@ -17,8 +17,6 @@ class HomeViewModel(private val repository: TopStoryRepository) : ViewModel() {
     private val _isReloadingData = MutableLiveData<Boolean>()
     val isReloadingData:LiveData<Boolean> get() = _isReloadingData
 
-    private val firstSection = "arts"
-
     private val sectionItem = listOf(
         "arts", "automobiles", "books", "business", "fashion",
         "food", "health", "home", "insider", "magazine",
