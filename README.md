@@ -29,10 +29,10 @@ To install the app, simply download the APK file from the [release page](https:/
 ## Usage
 
 1. Launch the app on your Android device.
-The app will automatically fetch the latest news articles from the New York Times API and display them in a list.
-Pull down the list to refresh the content.
-Tap on a news article to view its details.
-To return to the list view, use the back button on your device.
+2. The app will automatically fetch the latest news articles from the New York Times API and display them in a list.
+3. Pull down the list to refresh the content.
+4. Tap on a news article to view its details.
+5. To return to the list view, use the back button on your device.
 
 
 ## Configuration
@@ -59,6 +59,7 @@ The app uses the following dependencies:
 - Retrofit for networking
 - Glide for image loading and caching
 - ViewModel for managing data
+- Navigation Component
 - SwipeRefreshLayout for enabling pull-to-refresh functionality
 
 
