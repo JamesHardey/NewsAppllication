@@ -18,7 +18,7 @@ class TopStoryViewAdapter(private val listener: (TopStory) -> Unit) : RecyclerVi
             fun bind(topStory: TopStory, listener: (TopStory) -> Unit){
                 binding.articleTitle.text = topStory.title
                 binding.textView.text = topStory.abstract
-                binding.articleImage.load(topStory.multimedia.last().url)
+                binding.articleImage.load(topStory.multimedia[1].url)
                 binding.viewMore.setOnClickListener {
                     listener(topStory)
                 }

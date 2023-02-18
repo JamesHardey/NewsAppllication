@@ -8,7 +8,7 @@ import com.example.newapp.ui.home.HomeViewModel
 
 class MovieReviewsViewModelFactory(private val repository: MovieReviewRepository): ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(DashboardViewModel::class.java)){
             return DashboardViewModel(repository) as T
         }

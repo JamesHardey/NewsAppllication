@@ -43,7 +43,6 @@ class ArticleFragment : Fragment() {
         articleWebViewModel.text.observe(viewLifecycleOwner, Observer {
 
         })
-
         return binding.root
     }
 
@@ -53,18 +52,7 @@ class ArticleFragment : Fragment() {
         webView = binding.webView
         webView.loadUrl(link)
         webView.settings.javaScriptEnabled = true
-
-
     }
-
-
-
-
-
-
-
-
-
 
 
 

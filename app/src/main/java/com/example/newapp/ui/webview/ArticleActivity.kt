@@ -1,5 +1,6 @@
 package com.example.newapp.ui.webview
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebView
@@ -12,6 +13,7 @@ class ArticleActivity : AppCompatActivity() {
     private lateinit var webView: WebView
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         link = intent.getStringExtra("link")!!

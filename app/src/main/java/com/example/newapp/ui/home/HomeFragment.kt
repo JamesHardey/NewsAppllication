@@ -1,15 +1,12 @@
 package com.example.newapp.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -33,7 +30,7 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
 
     private lateinit var adapter: TopStoryViewAdapter
 
-    private val items = listOf(
+    private val items = arrayOf(
             "Arts", "Automobiles", "Books", "Business", "Fashion",
         "Food", "Health", "Home", "Insider", "Magazine", "Movies",
         "New-york Region", "Obituaries", "Opinion", "Politics",
@@ -44,9 +41,10 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
 
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var itemList: AutoCompleteTextView
+    private lateinit var itemList: Spinner
     private var value = 7
 
+    private lateinit var dropDownAdapter: ArrayAdapter<String>
     // This property is only valid between onCreateView and
     // onDestroyView.
 
@@ -56,12 +54,15 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        println("Home Fragment onCreateView")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        println("Home Fragment onViewCreated")
         adapter = TopStoryViewAdapter(){ topStory ->
             moveToArticleScreen(topStory)
         }
@@ -70,44 +71,77 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
         swipeRefreshLayout = binding.swipeRefresh
         swipeRefreshLayout.setOnRefreshListener(this)
 
+        itemList = binding.textInputLayout
 
-        val dropDownAdapter = ArrayAdapter(requireContext(), R.layout.item_list_section, items)
+        itemList.adapter = ArrayAdapter(
+            requireActivity(),
+            R.layout.item_list_section,
+            items
+        )
 
-        itemList = binding.dropdownField
-        itemList.setAdapter(dropDownAdapter)
+        itemList.onItemSelectedListener = object:AdapterView.OnItemSelectedListener{
 
-        itemList.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-                getData(position)
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    homeViewModel.select(position)
+//                getData(position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
         }
-
-        itemList.setText(dropDownAdapter.getItem(7).toString(),false)
 
         homeViewModel.topStory.observe(viewLifecycleOwner, Observer {
             adapter.add(it)
+            adapter.notifyDataSetChanged()
         })
 
         homeViewModel.isReloadingData.observe(viewLifecycleOwner) { isLoading ->
             swipeRefreshLayout.isRefreshing = isLoading
         }
 
-        getData(value)
+        homeViewModel.selectedItem.observe(viewLifecycleOwner){
+            getData(it)
+            value = it
+        }
+
+        println("check point 1")
+        itemList.setSelection(value)
 
     }
+
+
+
+    private fun getItemList(): List<String> {
+        return listOf(
+            "Arts", "Automobiles", "Books", "Business", "Fashion",
+            "Food", "Health", "Home", "Insider", "Magazine", "Movies",
+            "New-york Region", "Obituaries", "Opinion", "Politics",
+            "Real " +
+                    "Estate", "Science", "Sports", "Sunday Review",
+            "Technology", "Theater", "T-Magazine", "Travel",
+            "Upshot", "US", "World"
+        )
+    }
+
 
     override fun onRefresh() {
         getData(value)
     }
 
+
     private fun getData(value: Int){
         homeViewModel.retrieveDate(value)
     }
 
+
     private fun moveToArticleScreen(topStory: TopStory){
         val link = topStory.url
-        findNavController().navigate(R.id.action_navigation_home_to_articleFragment, bundleOf("link" to link))
+        findNavController().navigate(
+            R.id.action_navigation_home_to_articleFragment,
+            bundleOf("link" to link)
+        )
         val data = Intent(requireActivity(),ArticleActivity::class.java)
         data.putExtra("link",link)
-        //startActivity(data)
     }
 
 }
