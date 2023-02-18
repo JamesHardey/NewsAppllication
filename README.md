@@ -3,6 +3,9 @@
 This is an Android app that uses the New York Times API to display news articles. The app uses Retrofit to fetch data from the API, ViewModel to manage data, and SwipeRefreshLayout to enable users to refresh the content.
 
 
+## Screenshots
+
+<img src="https://user-images.githubusercontent.com/60360836/219853252-9a4f7f06-3cd9-46d4-964d-a329ab4eb0c3.png" width="200px"/>
 
 ## Features
 
@@ -53,7 +56,7 @@ The app uses the following dependencies:
 
 ## Contributing
 
-If you have any suggestions or would like to contribute to the project, feel free to open an issue or pull request on the [GitHub repository](https://github.com/JamesHardey/NewsAppllication).
+If you have any suggestions or would like to contribute to the project, feel free to open an issue or pull request on the [GitHub repository](https://github.com/JamesHardey/NewsAppllication/issues).
 
 
 
