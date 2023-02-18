@@ -20,6 +20,10 @@ This is an Android app that uses the New York Times API to display news articles
 <img src="https://user-images.githubusercontent.com/60360836/219853269-4657d93a-7b7e-4ded-b7fb-1c128a1611db.png" width="150px"/>
 </p>
 
+## App Testing
+
+You can test this application using an online emulator [Appetize](https://appetize.io/app/xxnvv2urjrlwdud55y63vxssia)
+
 ## Features
 
 - Fetches the latest news articles from the New York Times API
@@ -29,7 +33,7 @@ This is an Android app that uses the New York Times API to display news articles
 
 
 ## Installation
-To install the app, simply download the APK file from the [release page](https://google.com) and install it on your Android device.
+To install the app, simply download the APK file from the [release page](https://github.com/JamesHardey/NewsAppllication) and install it on your Android device.
 
 ## Usage
 
