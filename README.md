@@ -4,8 +4,16 @@ This is an Android app that uses the New York Times API to display news articles
 
 
 ## Screenshots
-
-<img src="https://user-images.githubusercontent.com/60360836/219853252-9a4f7f06-3cd9-46d4-964d-a329ab4eb0c3.png" width="200px"/>
+<p float="left">
+<img src="https://user-images.githubusercontent.com/60360836/219853252-9a4f7f06-3cd9-46d4-964d-a329ab4eb0c3.png" width="150px"/>
+<img src="https://user-images.githubusercontent.com/60360836/219853257-ce45b5aa-85c9-4472-8b1f-4e62228ef8d7.png" width="150px"/>
+<img src="https://user-images.githubusercontent.com/60360836/219853259-b9c9caa9-be81-4272-a7dc-713185220541.png" width="150px"/>
+<img src="https://user-images.githubusercontent.com/60360836/219853261-1601c734-d0bc-42bf-bec8-c9211f671043.png" width="150px"/>
+<img src="https://user-images.githubusercontent.com/60360836/219853262-93036fbe-6aa3-473f-9441-ab0f331b3073.png" width="150px"/>
+<img src="https://user-images.githubusercontent.com/60360836/219853264-90f776f6-dc39-4ed3-bdbf-4bca4628f8b8.png" width="150px"/>
+<img src="https://user-images.githubusercontent.com/60360836/219853267-274f618d-d73b-4a00-98fa-8f723f44fc4b.png" width="150px"/>
+<img src="https://user-images.githubusercontent.com/60360836/219853269-4657d93a-7b7e-4ded-b7fb-1c128a1611db.png" width="150px"/>
+</p>
 
 ## Features
 
