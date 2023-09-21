@@ -12,8 +12,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-private  val BASE_URL ="https://api.nytimes.com/svc/"
-private val key = ""
+const val BASE_URL ="https://api.nytimes.com/svc/"
 
 interface ApiService {
 
